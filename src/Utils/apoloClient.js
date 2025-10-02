@@ -11,6 +11,7 @@ const authLink =  ( authStorage ) => {
   const AuthLink = new SetContextLink( async (prevContext, operation) => {
   try {
     const token = await authStorage.getAccessToken();
+    console.log(token);
     return {
       headers: {
         ...prevContext.headers,
