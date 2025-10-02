@@ -3,12 +3,20 @@ import { View,
          StyleSheet, 
          Text, 
          TouchableWithoutFeedback,
+         TouchableOpacity,
          ScrollView
 
  } from "react-native";
 
 import Constants from 'expo-constants';
 import { Link } from "react-router-native";
+import { useQuery } from "@apollo/client/react";
+
+import { GET_ME } from "../graphql/queries";
+import useSignOut from "../Hooks/useSignOut";
+
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -34,23 +42,57 @@ const styles = StyleSheet.create({
 })
 
 const AppBar = () => {
+
+    const { loading, error, data } = useQuery(GET_ME);
+    const [ signOut ] = useSignOut();
+
+    if(loading){
+        return (
+            <View style = {styles.container}>
+                <Text>
+                Cargando...
+                </Text>
+            </View>
+        )
+        
+    }
+
+    if(error){
+        return (
+            <view style={styles.container}>
+                <Text>
+                    {`Error ${error.message}`}
+                </Text>
+            </view>
+        )
+    }
+
+    const signedIn = Boolean(data && data.me);
+
     return (
         <View style = {styles.container}>
             <ScrollView horizontal={true}>
-                <TouchableWithoutFeedback>
                     <View style = {styles.containerNabvar}>
-                        <Link to='/'>
+                        <Link to='/' >
                             <Text style = {styles.text}>
                                 Repositories
                             </Text>
                         </Link>
-                        <Link to = 'SignIn'>
-                            <Text style = {styles.text}>
-                                Sig In
-                            </Text>            
-                        </Link>
+                        {
+                            signedIn ?  
+                            <TouchableOpacity onPress={signOut}>
+                                <Text style = {styles.text}>
+                                    Sig Out
+                                </Text>   
+                            </TouchableOpacity>                       
+                            :
+                            <Link to = 'SignIn'>
+                                <Text style = {styles.text}>
+                                    Sig In
+                                </Text>            
+                            </Link>
+                        }
                     </View>
-                </TouchableWithoutFeedback>
             </ScrollView>
         </View>
     )
