@@ -1,11 +1,8 @@
 import { ApolloClient, HttpLink, InMemoryCache, ApolloLink } from '@apollo/client';
 import { API_GRAPHQL, IP } from '@env';
 import { SetContextLink } from '@apollo/client/link/context';
-import AuthStorage from './authStorage';
 
 const uri = API_GRAPHQL || `http://${IP}:4000`;
-
-const auth = new AuthStorage();
 
 const httpLink = new HttpLink({uri: uri})
 
