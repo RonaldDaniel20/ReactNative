@@ -14,7 +14,7 @@ import { useQuery } from "@apollo/client/react";
 
 import { GET_ME } from "../graphql/queries";
 import useSignOut from "../Hooks/useSignOut";
-
+import Loading from "./loading/Loading";
 
 
 
@@ -48,10 +48,8 @@ const AppBar = () => {
 
     if(loading){
         return (
-            <View style = {styles.container}>
-                <Text>
-                Cargando...
-                </Text>
+            <View>
+                <Loading />
             </View>
         )
         

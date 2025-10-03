@@ -1,5 +1,6 @@
 import React from "react"
 import { FlatList, View, StyleSheet } from "react-native"
+import Loading from "./loading/Loading";
 import RepositoryItem from "./RepositoryItem";
 import useRepo from "../Hooks/useRepo";
 
@@ -18,6 +19,14 @@ const ItemSeparator = () => <View style={styles.separator}></View>
 const RepositoryList = () => {
 
     const { data, loading, refetch } = useRepo();
+
+    if(loading){
+        return (
+            <View>
+                <Loading />
+            </View>
+        )
+    }
 
 
     const repositoryNodes = data 

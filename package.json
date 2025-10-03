@@ -23,9 +23,11 @@
     "react-dom": "19.1.0",
     "react-native": "0.81.4",
     "react-native-dotenv": "^3.4.11",
+    "react-native-vector-icons": "^10.3.0",
     "react-native-web": "^0.21.0",
     "react-refresh": "^0.17.0",
     "react-router-native": "^6.30.0",
+    "react-spinners": "^0.17.0",
     "yup": "^1.7.1"
   },
   "devDependencies": {

@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
 const Main = () => {
   return (
     <View>
-      <AppBar />
+      <View>
+        <AppBar />
+      </View>
       <View style={styles.container}>
         <Routes>
           <Route  path='/' element = {<RepositoryList />}/>

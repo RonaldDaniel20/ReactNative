@@ -1,6 +1,7 @@
 import react from "react";
 import Text from "./Text";
 import { View, StyleSheet, Button } from "react-native";
+import Loading from "./loading/Loading";
 
 import { useNavigate } from "react-router-native";
 import { Formik } from "formik";
@@ -10,6 +11,9 @@ import FormikTextInput from "./FormikTextInput";
 import * as yup from 'yup';
 
 import useSignIn from "../Hooks/useSignIn";
+
+import Notification from "./notification/Notification";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
     container: {
@@ -31,6 +35,11 @@ const styles = StyleSheet.create({
     containerTwo: {
         gap: 10
     },
+
+    notificationWrapper: {
+        position: 'absolute',
+        zIndex: 9999,
+    }
 })
 
 const BodyInformation = ({ onsubmit }) => {
@@ -60,6 +69,7 @@ const validationShema = yup.object().shape({
 const SigIn = () => {
 
     const [signIn, data, loading, error] = useSignIn();
+    const [showNotification, setShowNotification] = useState(false);
 
     const initialValues = {
         user: '',
@@ -75,7 +85,11 @@ const SigIn = () => {
 
         try {
             await signIn({ username: user, password});
-            navigate('/');
+            setShowNotification(true);
+
+            setTimeout(() => {
+                navigate('/');
+            }, 4000)
 
         }catch(e){
             console.error(e);
@@ -84,9 +98,9 @@ const SigIn = () => {
 
     if(loading){
         return(
-            <Text>
-                Cargando ...
-            </Text>
+            <View>
+                <Loading />
+            </View>
         )
     }
 
@@ -100,6 +114,12 @@ const SigIn = () => {
 
     return (
         <View style = {styles.container}>
+            
+            {showNotification &&
+                <View style = {styles.notificationWrapper}>
+                    <Notification  Titule={'success'} icon={'success'} description={'Login Exitoso'}/>
+                </View> 
+            }
             <Text style = {{fontSize: 20}}fontWeight={'bold'}>
                 Inicio de Sesión
             </Text>
