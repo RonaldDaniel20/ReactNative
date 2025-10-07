@@ -57,11 +57,11 @@ const AppBar = () => {
 
     if(error){
         return (
-            <view style={styles.container}>
+            <View style={styles.container}>
                 <Text>
                     {`Error ${error.message}`}
                 </Text>
-            </view>
+            </View>
         )
     }
 

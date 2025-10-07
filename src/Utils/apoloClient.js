@@ -4,6 +4,7 @@ import { SetContextLink } from '@apollo/client/link/context';
 
 const uri = API_GRAPHQL || `http://${IP}:4000`;
 
+
 const httpLink = new HttpLink({uri: uri})
 
 const authLink =  ( authStorage ) => {
