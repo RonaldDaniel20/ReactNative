@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
 const BodyInformation = ({ onsubmit }) => {
     return (
         <View style = {styles.containerTwo}>
-            <FormikTextInput style = {styles.StylesText} name={'user'} placeholder = {'Username'} />
-            <FormikTextInput secureTextEntry = {true} style = {styles.StylesText} name={'password'} placeholder = {'Password'} />
-            <Button  title="Sign In" onPress={onsubmit}/>
+            <FormikTextInput style = {styles.StylesText} name={'user'} placeholder = {'Username'} testID = "username"/>
+            <FormikTextInput secureTextEntry = {true} style = {styles.StylesText} name={'password'} placeholder = {'Password'} testID = "password" />
+            <Button  title="Sign In" onPress={onsubmit} testID="submittButton"/>
         </View>
     )
 }
@@ -65,20 +65,26 @@ const validationShema = yup.object().shape({
 });
 
 
-//Componente principal
-const SigIn = () => {
-
+const SignInContainer = () => {
     const [signIn, data, loading, error] = useSignIn();
     const [showNotification, setShowNotification] = useState(false);
-
-    const initialValues = {
-        user: '',
-        password: ''
-    }
-
     const navigate = useNavigate();
 
+    if(loading){
+        return(
+            <View>
+                <Loading />
+            </View>
+        )
+    }
 
+    if(error){
+        return(
+            <Text style={styles.container}>
+                {`Error ${error.message}`}
+            </Text>
+        )
+    }
 
     const onSubmit = async (values) => {
         const { user, password } = values;
@@ -96,38 +102,79 @@ const SigIn = () => {
         }
     }
 
-    if(loading){
-        return(
-            <View>
-                <Loading />
-            </View>
-        )
-    }
-
-    if(error){
-        return(
-            <Text>
-                {`Error ${error.message}`}
-            </Text>
-        )
-    }
-
     return (
-        <View style = {styles.container}>
-            
+        <View>
             {showNotification &&
                 <View style = {styles.notificationWrapper}>
                     <Notification  Titule={'success'} icon={'success'} description={'Login Exitoso'}/>
                 </View> 
             }
+            <SigIn onSubmit={onSubmit}/>
+        </View>
+    )
+}
+
+//Componente principal
+export const SigIn = ({ onSubmit }) => {
+
+    //const [signIn, data, loading, error] = useSignIn();
+    //const [showNotification, setShowNotification] = useState(false);
+
+    const initialValues = {
+        user: '',
+        password: ''
+    }
+
+    const handle = async (values) => {
+        onSubmit(values);
+    };
+
+    //const navigate = useNavigate();
+
+
+
+    // const onSubmit = async (values) => {
+    //     const { user, password } = values;
+
+    //     try {
+    //         await signIn({ username: user, password});
+    //         setShowNotification(true);
+
+    //         setTimeout(() => {
+    //             navigate('/');
+    //         }, 4000)
+
+    //     }catch(e){
+    //         console.error(e);
+    //     }
+    // }
+
+    // if(loading){
+    //     return(
+    //         <View>
+    //             <Loading />
+    //         </View>
+    //     )
+    // }
+
+    // if(error){
+    //     return(
+    //         <Text>
+    //             {`Error ${error.message}`}
+    //         </Text>
+    //     )
+    // }
+
+    return (
+        <View style = {styles.container}>
             <Text style = {{fontSize: 20}}fontWeight={'bold'}>
                 Inicio de Sesión
             </Text>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationShema}>
+            <Formik initialValues={initialValues} onSubmit={handle} validationSchema={validationShema}>
                 {({handleSubmit}) => <BodyInformation onsubmit={handleSubmit}/>}
             </Formik>
         </View>
     )
 }
 
-export default SigIn;
+export default SignInContainer;

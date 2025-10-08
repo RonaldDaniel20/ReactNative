@@ -6,7 +6,7 @@ import { Route, Routes, Navigate} from 'react-router-native';
 // Importación de componentes
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
-import SigIn from './SigIn';
+import SignInContainer from './SigIn';
 
 
 const styles = StyleSheet.create({
@@ -27,7 +27,7 @@ const Main = () => {
       <View style={styles.container}>
         <Routes>
           <Route  path='/' element = {<RepositoryList />}/>
-          <Route  path='/SignIn' element = {<SigIn />}/>
+          <Route  path='/SignIn' element = {<SignInContainer />}/>
           <Route  path='*' element = {<Navigate to = '/' replace/>}/>
         </Routes>
       </View>

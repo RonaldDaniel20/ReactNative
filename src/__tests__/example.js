@@ -1,5 +1,8 @@
-import { render, within } from "@testing-library/react-native";
+import React, { act } from 'react';
+import { render, within, waitFor, fireEvent } from "@testing-library/react-native";
 import { RepositoryListContainer } from "../components/RepositoryList";
+import { SigIn } from '../components/SigIn';
+
 
 describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
@@ -82,6 +85,35 @@ describe('RepositoryList', () => {
         expect(within(items[i]).getByTestId('reviewCount')).toHaveTextContent(node.reviewCount.toString());
         expect(within(items[i]).getByTestId('ratingAverage')).toHaveTextContent(node.ratingAverage.toString());
       }
+    });
+  });
+});
+
+describe('SignIn', () => {
+  describe('SignInContainer', () => {
+    it('calls onSubmit function with correct arguments when a valid form is submitted', async () => {
+      // render the SignInContainer component, fill the text inputs and press the submit button
+      const onSubmit = jest.fn();
+      const { getByTestId } = render(<SigIn onSubmit={onSubmit}/>);
+
+      await act(async () => {
+        fireEvent.changeText(getByTestId('username'), 'kalle');
+      });
+
+      await act(async () => {
+        fireEvent.changeText(getByTestId('password'), 'password');
+      });
+
+      await act(async () => {
+        fireEvent.press(getByTestId('submittButton'));
+      })
+
+      await waitFor(() => {
+        expect(onSubmit.mock.calls[0][0]).toEqual({
+            user: 'kalle',
+            password: 'password'
+        })
+      });
     });
   });
 });
