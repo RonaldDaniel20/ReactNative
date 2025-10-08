@@ -41,14 +41,14 @@ const PrimaryTarget = ({url, titule, description, lenguage}) => {
                 />
             </View>
             <View style = {styles.bodyContainer}>
-                <Text fontWeight={'bold'}>
+                <Text fontWeight={'bold'} testID = 'fullname'>
                     {titule}
                 </Text>
-                <Text color={'textSecondary'}>
+                <Text color={'textSecondary'} testID = 'description'>
                     {description}
                 </Text>
                 <View style = {styles.flexItem}>
-                    <Text style={{color: 'white'}}>{lenguage}</Text>
+                    <Text style={{color: 'white'}} testID = 'lenguage'>{lenguage}</Text>
                 </View>
             </View>
         </View>

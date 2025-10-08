@@ -34,19 +34,19 @@ const SecondTarget = ({starts, forks, reviews, Rating}) => {
     return (
         <View style = {styles.container}>
             <View style = {styles.stileView}>
-                <Text fontWeight={'bold'}>{transformNumber(starts, true)}</Text>
+                <Text fontWeight={'bold'} testID ="stargazersCount">{transformNumber(starts, true)}</Text>
                 <Text color={'textSecondary'}>Starts</Text>
             </View>
             <View style = {styles.stileView}>
-                <Text fontWeight={'bold'}>{transformNumber(forks, true)}</Text>
+                <Text fontWeight={'bold'} testID = "forksCount">{transformNumber(forks, true)}</Text>
                 <Text color={'textSecondary'}>Forks</Text>
             </View>
             <View style = {styles.stileView}>
-                <Text fontWeight={'bold'}>{reviews}</Text>
+                <Text fontWeight={'bold'} testID = "reviewCount">{reviews}</Text>
                 <Text color={'textSecondary'}>Reviews</Text>
             </View>
             <View style = {styles.stileView}>
-                <Text fontWeight={'bold'}>{Rating}</Text>
+                <Text fontWeight={'bold'} testID = "ratingAverage">{Rating}</Text>
                 <Text color={'textSecondary'}>Rating</Text>
             </View>
         </View>

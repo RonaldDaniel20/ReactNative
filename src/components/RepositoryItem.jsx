@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 const RepositoryItem = ({props}) => {
     return (
-        <View style = {styles.flexContainerPrincipal}>
+        <View style = {styles.flexContainerPrincipal} testID="Item">
             <PrimaryTarget 
                 titule={props.fullName} 
                 url={props.ownerAvatarUrl}

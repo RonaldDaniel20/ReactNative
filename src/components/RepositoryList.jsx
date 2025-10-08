@@ -5,9 +5,6 @@ import RepositoryItem from "./RepositoryItem";
 import useRepo from "../Hooks/useRepo";
 
 
-//Queries
-import { GET_REPOSITORIES } from "../graphql/queries";
-
 const styles = StyleSheet.create({
     separator: {
         height: 10,
@@ -15,6 +12,21 @@ const styles = StyleSheet.create({
 });
 
 const ItemSeparator = () => <View style={styles.separator}></View>
+
+export const RepositoryListContainer = ({ data }) => {
+    const repositoryNodes = data 
+                        ? data.repositories.edges.map(edge => edge.node)
+                        : [];
+    
+    return (
+        <FlatList 
+            data={repositoryNodes}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={({item}) => <RepositoryItem props={item}/>}
+            keyExtractor={item => item.id}
+        />
+    )
+}
 
 const RepositoryList = () => {
 
@@ -28,19 +40,8 @@ const RepositoryList = () => {
         )
     }
 
+    return <RepositoryListContainer data={data}/>
 
-    const repositoryNodes = data 
-                            ? data.repositories.edges.map(edge => edge.node)
-                            : [];
-
-    return (
-        <FlatList 
-            data={repositoryNodes}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({item}) => <RepositoryItem props={item}/>}
-            keyExtractor={item => item.id}
-        />
-    )
 }
 
 export default RepositoryList;
