@@ -7,6 +7,7 @@ import { Route, Routes, Navigate} from 'react-router-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import SignInContainer from './SigIn';
+import UniqueRepository from './uniqueRepository/UniqueRepository';
 
 
 const styles = StyleSheet.create({
@@ -29,6 +30,7 @@ const Main = () => {
           <Route  path='/' element = {<RepositoryList />}/>
           <Route  path='/SignIn' element = {<SignInContainer />}/>
           <Route  path='*' element = {<Navigate to = '/' replace/>}/>
+          <Route  path='/repository/:id' element = {<UniqueRepository />}/>
         </Routes>
       </View>
     </View>

@@ -117,8 +117,6 @@ const SignInContainer = () => {
 //Componente principal
 export const SigIn = ({ onSubmit }) => {
 
-    //const [signIn, data, loading, error] = useSignIn();
-    //const [showNotification, setShowNotification] = useState(false);
 
     const initialValues = {
         user: '',
@@ -129,41 +127,6 @@ export const SigIn = ({ onSubmit }) => {
         onSubmit(values);
     };
 
-    //const navigate = useNavigate();
-
-
-
-    // const onSubmit = async (values) => {
-    //     const { user, password } = values;
-
-    //     try {
-    //         await signIn({ username: user, password});
-    //         setShowNotification(true);
-
-    //         setTimeout(() => {
-    //             navigate('/');
-    //         }, 4000)
-
-    //     }catch(e){
-    //         console.error(e);
-    //     }
-    // }
-
-    // if(loading){
-    //     return(
-    //         <View>
-    //             <Loading />
-    //         </View>
-    //     )
-    // }
-
-    // if(error){
-    //     return(
-    //         <Text>
-    //             {`Error ${error.message}`}
-    //         </Text>
-    //     )
-    // }
 
     return (
         <View style = {styles.container}>
