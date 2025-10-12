@@ -10,6 +10,8 @@ import AuthStorage from "./src/Utils/authStorage";
 //Contexto
 import AuthStorageContext from "./src/context/AuthStorageContext";
 
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 const storage = new AuthStorage();
 
 const Client = client(storage);
@@ -19,7 +21,9 @@ const App = () => {
     <NativeRouter>
         <ApolloProvider client={Client}>
           <AuthStorageContext.Provider value={storage}>
-            <Main />
+            <SafeAreaProvider>
+              <Main />
+            </SafeAreaProvider>
           </AuthStorageContext.Provider>
         </ApolloProvider>
     </NativeRouter>

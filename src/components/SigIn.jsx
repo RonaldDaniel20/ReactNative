@@ -17,11 +17,9 @@ import { useState } from "react";
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 10
+        gap: 10,
     },
 
     StylesText: {
@@ -39,6 +37,15 @@ const styles = StyleSheet.create({
     notificationWrapper: {
         position: 'absolute',
         zIndex: 9999,
+    }, 
+
+    containerLoading: {
+        flex: 1
+    },
+
+    containerRaiz: {
+        flex: 1,
+        backgroundColor: 'white',
     }
 })
 
@@ -72,7 +79,7 @@ const SignInContainer = () => {
 
     if(loading){
         return(
-            <View>
+            <View style={styles.containerLoading}>
                 <Loading />
             </View>
         )
@@ -103,7 +110,7 @@ const SignInContainer = () => {
     }
 
     return (
-        <View>
+        <View style = {styles.containerRaiz}>
             {showNotification &&
                 <View style = {styles.notificationWrapper}>
                     <Notification  Titule={'success'} icon={'success'} description={'Login Exitoso'}/>

@@ -7,9 +7,18 @@ import { useNavigate } from "react-router-native";
 
 
 const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+    },
+
     separator: {
         height: 10,
     },
+
+    containerLoading: {
+        flex: 1
+    }
 });
 
 const ItemSeparator = () => <View style={styles.separator}></View>
@@ -46,13 +55,17 @@ const RepositoryList = () => {
 
     if(loading){
         return (
-            <View>
+            <View style={styles.containerLoading}>
                 <Loading />
             </View>
         )
     }
 
-    return <RepositoryListContainer data={data}/>
+    return (
+        <View style={styles.container}>
+            <RepositoryListContainer data={data}/>
+        </View>
+    )
 
 }
 

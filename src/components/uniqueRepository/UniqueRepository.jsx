@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     container: {
         gap: 10,
         padding: 6,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        flex: 1
     },
 
     button: {
@@ -23,9 +24,11 @@ const styles = StyleSheet.create({
     text: {
         color: 'white',
         fontWeight: 'bold'
+    },
+
+    containerLoading: {
+        flex: 1
     }
-
-
 })
 
 const UniqueRepository = () => {
@@ -34,7 +37,7 @@ const UniqueRepository = () => {
 
     if(loading){
         return (
-            <View>
+            <View style={styles.containerLoading}>
                 <Loading />
             </View>
         )

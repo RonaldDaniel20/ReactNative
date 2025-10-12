@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { use } from 'react';
 import Constants from 'expo-constants';
 import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate} from 'react-router-native';
+
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Importación de componentes
 import RepositoryList from './RepositoryList';
@@ -9,23 +11,24 @@ import AppBar from './AppBar';
 import SignInContainer from './SigIn';
 import UniqueRepository from './uniqueRepository/UniqueRepository';
 
-
 const styles = StyleSheet.create({
-  container: {
+  containerContent: {
     marginLeft: 8,
-    flexGrow: 1,
-    flexShrink: 1,
-    backgroundColor: '#e1e4e8'
+    backgroundColor: '#e1e4e8',
+    flex: 1,
   },
 });
 
 const Main = () => {
+
+  const insets = useSafeAreaInsets();
+
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1, paddingBottom: insets.bottom}}>
       <View>
         <AppBar />
       </View>
-      <View style={styles.container}>
+      <View style={styles.containerContent}>
         <Routes>
           <Route  path='/' element = {<RepositoryList />}/>
           <Route  path='/SignIn' element = {<SignInContainer />}/>
@@ -33,7 +36,7 @@ const Main = () => {
           <Route  path='/repository/:id' element = {<UniqueRepository />}/>
         </Routes>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

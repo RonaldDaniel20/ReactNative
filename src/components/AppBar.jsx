@@ -20,15 +20,14 @@ import Loading from "./loading/Loading";
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: Constants.statusBarHeight,
         backgroundColor: '#24292e',
-        height: 80,
+        height: 50,
         justifyContent: 'flex-center',
         paddingLeft: 10
     },
     text: {
         color: 'white',
-        fontWeight: 700,
+        fontWeight: 700, 
         fontSize: 16
     },
 

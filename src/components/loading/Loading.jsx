@@ -1,27 +1,19 @@
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-import Constants from 'expo-constants';
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-const style = StyleSheet.create({
-    container: {
-        display: 'flex',
-        backgroundColor: 'white',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 50,
+const styles = StyleSheet.create({
+    containerLoading: {
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: Constants.statusBarHeight,
+        backgroundColor: 'white',
     },
+
 })
 
 
 const Loading = () => {
 
     return (
-        <View style = {style.container}>
+        <View style={styles.containerLoading}>
             <ActivityIndicator size={'large'} color={'#00ff00'}/>
         </View>
     )
