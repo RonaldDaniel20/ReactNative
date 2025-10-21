@@ -106,13 +106,14 @@ const CreateReview = () => {
 
     return (
         <KeyboardAvoidingView 
-            style = {{flex: 1}} 
+            style = {{flex: 1, backgroundColor: 'white'}} 
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
             >
             <KeyboardAwareScrollView 
                 contentContainerStyle={styles.scrollContainer}
+                keyboardShouldPersistTaps="handled"
                 enableOnAndroid={true}
+                resetScrollToCoords={{ x: 0, y: 0 }}
             >
                 <View style = {styles.container}>
                     { notification && 
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     },
 
     scrollContainer: {
-        flex: 1
+        flexGrow: 1
     }
 
 })
