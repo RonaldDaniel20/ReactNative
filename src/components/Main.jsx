@@ -11,6 +11,8 @@ import AppBar from './AppBar';
 import SignInContainer from './SigIn';
 import UniqueRepository from './uniqueRepository/UniqueRepository';
 
+import CreateReview from './formReview/CreateReview';
+
 const styles = StyleSheet.create({
   containerContent: {
     marginLeft: 10,
@@ -35,6 +37,7 @@ const Main = () => {
           <Route  path='/SignIn' element = {<SignInContainer />}/>
           <Route  path='*' element = {<Navigate to = '/' replace/>}/>
           <Route  path='/repository/:id' element = {<UniqueRepository />}/>
+          <Route  path='/createReview' element = {<CreateReview />}/>
         </Routes>
       </View>
     </SafeAreaView>

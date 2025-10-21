@@ -2,7 +2,6 @@ import React from "react";
 import { View, 
          StyleSheet, 
          Text, 
-         TouchableWithoutFeedback,
          TouchableOpacity,
          ScrollView
 
@@ -75,18 +74,28 @@ const AppBar = () => {
                                 Repositories
                             </Text>
                         </Link>
-                        {
-                            signedIn ?  
-                            <TouchableOpacity onPress={signOut}>
-                                <Text style = {styles.text}>
-                                    Sig Out
-                                </Text>   
-                            </TouchableOpacity>                       
+                        { 
+                            signedIn ?  (
+                                <>
+                                    <TouchableOpacity>
+                                        <Link to='/createReview'>
+                                            <Text style = {styles.text}>
+                                                Create a review
+                                            </Text>
+                                        </Link>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={signOut}>
+                                        <Text style = {styles.text}>
+                                            Sign Out
+                                        </Text>   
+                                    </TouchableOpacity>
+                                </>
+                            )                    
                             :
                             <Link to = 'SignIn'>
                                 <Text style = {styles.text}>
-                                    Sig In
-                                </Text>            
+                                    Sign In
+                                </Text>
                             </Link>
                         }
                     </View>
