@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
+import { View, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { useNavigate } from "react-router-native";
 import Text from "../Text";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 //Libreria para validar y crear formularios
 import { Formik } from "formik";
@@ -72,7 +73,7 @@ const CreateReview = () => {
 
     if(error){
         return (
-            <View>
+            <View style = {{ flex: 1, backgroundColor: 'white'}}>
                 <Text>{error.message}</Text>
             </View>
         )
@@ -104,21 +105,29 @@ const CreateReview = () => {
 
 
     return (
-        <KeyboardAvoidingView style = {{flex: 1}} 
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <View style = {styles.container}>
-                { notification && 
-                    <View> 
-                        <Notification Title={'Success'} icon={'success'} description={'Review created successfully'}/>
+        <KeyboardAvoidingView 
+            style = {{flex: 1}} 
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
+            >
+            <KeyboardAwareScrollView 
+                contentContainerStyle={styles.scrollContainer}
+                enableOnAndroid={true}
+            >
+                <View style = {styles.container}>
+                    { notification && 
+                        <View> 
+                            <Notification Title={'Success'} icon={'success'} description={'Review created successfully'}/>
+                        </View>
+                    }
+                    <View style = {{alignItems: 'center', marginBottom: 10}}>
+                        <Text style = {{fontSize: 25}} fontWeight={'bold'}> Create a Review </Text>
                     </View>
-                }
-                <View style = {{alignItems: 'center', marginBottom: 10}}>
-                    <Text style = {{fontSize: 25}} fontWeight={'bold'}> Create a Review </Text>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>  
+                        {({ handleSubmit }) => <InputInformation  onSubmit={handleSubmit}/>}
+                    </Formik>   
                 </View>
-                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>  
-                    {({ handleSubmit }) => <InputInformation  onSubmit={handleSubmit}/>}
-                </Formik>
-            </View>
+            </KeyboardAwareScrollView>
         </KeyboardAvoidingView>
     ) 
 
@@ -127,7 +136,7 @@ const CreateReview = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+        padding: 20,
         backgroundColor: 'white',
         gap: 5
     },
@@ -144,6 +153,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 4,
         padding: 10,
+    },
+
+    scrollContainer: {
+        flex: 1
     }
 
 })
