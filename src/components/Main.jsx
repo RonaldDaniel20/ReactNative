@@ -13,7 +13,8 @@ import UniqueRepository from './uniqueRepository/UniqueRepository';
 
 const styles = StyleSheet.create({
   containerContent: {
-    marginLeft: 8,
+    marginLeft: 10,
+    marginRight: 10,
     backgroundColor: '#e1e4e8',
     flex: 1,
   },

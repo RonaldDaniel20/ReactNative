@@ -31,7 +31,6 @@ export const RepositoryListContainer = ({ data }) => {
     const navigate = useNavigate();
 
     const onPress = ( id ) => {
-        console.log(id);
         navigate(`/repository/${id}`);
     }
 

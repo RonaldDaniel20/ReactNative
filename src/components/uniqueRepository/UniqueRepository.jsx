@@ -5,13 +5,14 @@ import useUniqueRepo from "../../Hooks/useUniqueRepo";
 import Loading from "../loading/Loading";
 import RepositoryItem from "../RepositoryItem";
 import Text from "../Text";
+import Reviews from "../reviews/Reviews";
 
 const styles = StyleSheet.create({
     container: {
         gap: 10,
         padding: 6,
+        paddingBottom: 10,
         backgroundColor: 'white',
-        flex: 1
     },
 
     button: {
@@ -62,12 +63,14 @@ const UniqueRepository = () => {
 
  
     return (
-        <View style = {styles.container}>
-            <RepositoryItem props={repository} />
-            <TouchableOpacity style = {styles.button} onPress={handlePress}>
-                <Text style={styles.text}>Open in GitHub</Text>
-            </TouchableOpacity>
-
+        <View style = {{flex: 1}}>
+            <View style = {styles.container}>
+                <RepositoryItem props={repository} />
+                <TouchableOpacity style = {styles.button} onPress={handlePress}>
+                    <Text style={styles.text}>Open in GitHub</Text>
+                </TouchableOpacity>
+            </View>
+            <Reviews id={id} />
         </View>
     )
 }
