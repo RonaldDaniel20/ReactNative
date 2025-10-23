@@ -92,11 +92,20 @@ const AppBar = () => {
                                 </>
                             )                    
                             :
-                            <Link to = 'SignIn'>
-                                <Text style = {styles.text}>
-                                    Sign In
-                                </Text>
-                            </Link>
+                            (
+                                <>
+                                    <Link to = '/SignIn'>
+                                        <Text style = {styles.text}>
+                                            Sign In
+                                        </Text>
+                                    </Link>
+                                    <Link to = '/register'>
+                                        <Text style = {styles.text}>
+                                            Sign Up
+                                        </Text>
+                                    </Link>
+                                </>
+                            )
                         }
                     </View>
             </ScrollView>

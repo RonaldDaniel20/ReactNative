@@ -17,17 +17,9 @@ import { useState } from "react";
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingLeft: 20,
+        paddingRight: 20,
         gap: 10,
-    },
-
-    StylesText: {
-        borderRadius: 8,
-        borderWidth: 1,
-        width: 250,
-        borderColor: '#ccc',
-        paddingLeft: 11
     },
 
     containerTwo: {
@@ -52,8 +44,8 @@ const styles = StyleSheet.create({
 const BodyInformation = ({ onsubmit }) => {
     return (
         <View style = {styles.containerTwo}>
-            <FormikTextInput style = {styles.StylesText} name={'user'} placeholder = {'Username'} testID = "username"/>
-            <FormikTextInput secureTextEntry = {true} style = {styles.StylesText} name={'password'} placeholder = {'Password'} testID = "password" />
+            <FormikTextInput name={'user'} placeholder = {'Username'} testID = "username"/>
+            <FormikTextInput secureTextEntry = {true} name={'password'} placeholder = {'Password'} testID = "password" />
             <Button  title="Sign In" onPress={onsubmit} testID="submittButton"/>
         </View>
     )
@@ -137,9 +129,11 @@ export const SigIn = ({ onSubmit }) => {
 
     return (
         <View style = {styles.container}>
-            <Text style = {{fontSize: 20}}fontWeight={'bold'}>
-                Inicio de Sesión
-            </Text>
+            <View style = {{alignItems: 'center', margin: 10}}>
+                <Text style = {{fontSize: 26 }}fontWeight={'bold'}>
+                    Inicio de Sesión
+                </Text>
+            </View>
             <Formik initialValues={initialValues} onSubmit={handle} validationSchema={validationShema}>
                 {({handleSubmit}) => <BodyInformation onsubmit={handleSubmit}/>}
             </Formik>

@@ -12,6 +12,7 @@ import SignInContainer from './SigIn';
 import UniqueRepository from './uniqueRepository/UniqueRepository';
 
 import CreateReview from './formReview/CreateReview';
+import Register from './user/Register';
 
 const styles = StyleSheet.create({
   containerContent: {
@@ -38,6 +39,7 @@ const Main = () => {
           <Route  path='*' element = {<Navigate to = '/' replace/>}/>
           <Route  path='/repository/:id' element = {<UniqueRepository />}/>
           <Route  path='/createReview' element = {<CreateReview />}/>
+          <Route  path='/register' element = {<Register />} />
         </Routes>
       </View>
     </SafeAreaView>

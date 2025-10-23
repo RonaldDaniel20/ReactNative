@@ -13,7 +13,7 @@ import useCreateReview from "../../Hooks/useCreateReview";
 import Loading from "../loading/Loading";
 import Notification from "../notification/Notification";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 
 const validationSchema = yup.object().shape({
@@ -37,10 +37,10 @@ const validationSchema = yup.object().shape({
 const InputInformation = ({ onSubmit }) => {
     return (
         <View style = {{gap: 10}}>
-            <FormikTextInput style = {styles.styleText} name='ownerName' placeholder='Repository Owner'/>
-            <FormikTextInput style = {styles.styleText} name='repositoryName' placeholder='Repository Name'/>
-            <FormikTextInput style = {styles.styleText} name='rating' keyboardType="numeric" placeholder='Rating between 0 and 100'/>
-            <FormikTextInput style={styles.styleText} name="text" placeholder="Review" multiline={true} />
+            <FormikTextInput name='ownerName' placeholder='Repository Owner'/>
+            <FormikTextInput name='repositoryName' placeholder='Repository Name'/>
+            <FormikTextInput name='rating' keyboardType="numeric" placeholder='Rating between 0 and 100'/>
+            <FormikTextInput name="text" placeholder="Review" multiline={true} />
             <TouchableOpacity style = {styles.styleButton} onPress={onSubmit}>
                 <Text style = {{color: 'white', fontWeight: 'bold'}}> Submit Review </Text>
             </TouchableOpacity>
@@ -53,6 +53,17 @@ const CreateReview = () => {
 
     const [ createNewReview, data, loading, error ] = useCreateReview();
     const [ notification, setNotification ] = useState(false);
+    const navigate = useNavigate();
+    const timeoutRef = useRef(null)
+
+    useEffect(() => {
+        return () => {
+            if(timeoutRef.current){
+                clearTimeout(timeoutRef.current);
+            }
+        }
+    },[])
+
 
     const initialValues = {
         ownerName: '',
@@ -61,7 +72,6 @@ const CreateReview = () => {
         text: ''
     }
 
-    const navigate = useNavigate();
 
     if(loading){
         return (
@@ -82,6 +92,7 @@ const CreateReview = () => {
     const onSubmit = async ( values ) => {
         const { ownerName, repositoryName, rating, text } = values;
 
+
         try {
 
             console.log(typeof(rating));
@@ -94,9 +105,10 @@ const CreateReview = () => {
 
             setNotification(true);
 
-            setTimeout(() => {
+            timeoutRef.current = setTimeout(() => {
+                setNotification(false);
                 navigate(`/repository/${request.data.createReview.repositoryId}`);
-            }, 4000)
+            }, 3000)
 
         }catch (e){
             console.error(e);
@@ -140,13 +152,6 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'white',
         gap: 5
-    },
-
-    styleText: {
-        borderRadius: 4,
-        borderWidth: 2,
-        borderColor: '#ccc',
-        paddingLeft: 10,
     },
 
     styleButton: {
