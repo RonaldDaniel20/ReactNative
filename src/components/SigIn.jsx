@@ -93,6 +93,7 @@ const SignInContainer = () => {
             setShowNotification(true);
 
             setTimeout(() => {
+                setShowNotification(false);
                 navigate('/');
             }, 4000)
 
