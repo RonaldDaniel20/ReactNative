@@ -48,6 +48,10 @@ const Reviews = ( { id } ) => {
         )
     }
 
+    const onEndReach = () => {
+        console.log('Hello world!');
+    }
+
     const reviews = data ? data.repository.reviews.edges.map(edge => edge.node) : [];
 
     return (
@@ -57,6 +61,8 @@ const Reviews = ( { id } ) => {
                 ItemSeparatorComponent={ReviewSeparator}
                 renderItem={({ item }) => <ReviewItem review={item} />}
                 keyExtractor={item => item.id}
+                onEndReached={onEndReach}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )
