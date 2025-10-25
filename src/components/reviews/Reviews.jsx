@@ -30,15 +30,8 @@ const ReviewItem = ({ review }) => {
 
 const Reviews = ( { id } ) => {
 
-    const { data, loading, error } = useReview(id);
+    const { data, loading, error, handleFetchMore } = useReview(id, 5);
 
-    if(loading){
-        return (
-            <View style = { styles.container}>
-                <Loading />
-            </View>
-        )
-    }
 
     if(error){
         return (
@@ -46,6 +39,10 @@ const Reviews = ( { id } ) => {
                 <Text color={'red'}>{error.message}</Text>
             </View>
         )
+    }
+
+    const onEndReach = () => {
+        handleFetchMore();
     }
 
     const reviews = data ? data.repository.reviews.edges.map(edge => edge.node) : [];
@@ -57,6 +54,8 @@ const Reviews = ( { id } ) => {
                 ItemSeparatorComponent={ReviewSeparator}
                 renderItem={({ item }) => <ReviewItem review={item} />}
                 keyExtractor={item => item.id}
+                onEndReached={onEndReach}
+                onEndReachedThreshold={0.5}
             />
         </View>
     )
