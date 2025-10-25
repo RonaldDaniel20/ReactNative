@@ -95,7 +95,7 @@ const SignInContainer = () => {
             setTimeout(() => {
                 setShowNotification(false);
                 navigate('/');
-            }, 4000)
+            }, 2000)
 
         }catch(e){
             console.error(e);

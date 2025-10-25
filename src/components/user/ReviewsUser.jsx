@@ -1,13 +1,16 @@
 import { View, StyleSheet, FlatList } from "react-native"
-import { ReviewItem } from "../reviews/Reviews";
 import useProfile from "../../Hooks/useProfile";
 import Loading from "../loading/Loading";
+import Text from "../Text";
+
+import ReviewOptions from "./ReviewOptions";
+
 
 const ItemSeparator = () => <View style={{height: 10}}></View>
 
 const ReviewsUser = () => {
 
-    const [data, loading, error] = useProfile(true);
+    const [data, loading, error, refetch] = useProfile(true);
 
     if(loading){
         return (
@@ -28,7 +31,9 @@ const ReviewsUser = () => {
         )
     }
 
-    const nodes = data ? data.me.reviews.edges.map(edge => edge.node): [];
+    console.log("Holala ",data);
+    const nodes = data.me ? data.me.reviews.edges.map(edge => edge.node): [];
+
 
     return (
         <View style = {stiles.container}>
@@ -36,9 +41,11 @@ const ReviewsUser = () => {
                 data={nodes}
                 ItemSeparatorComponent={ItemSeparator}
                 renderItem={({ item }) => (
-                    <ReviewItem  review={item}/>
+
+                    <ReviewOptions  item={item} refetch={refetch}/>
                  )}
                 key={item => item.id}
+                style = {{flex: 1}}
             />
         </View>
     )
@@ -47,6 +54,21 @@ const ReviewsUser = () => {
 const stiles = StyleSheet.create({
     container: {
         flex: 1
+    },
+
+    contianerButton: {
+        paddingVertical: 10,
+        paddingHorizontal:10 ,
+        flexDirection: 'row',
+        gap: 15,
+        justifyContent: 'center',
+    },
+
+    buttonStyle : {
+        borderRadius: 4,
+        padding: 10,
+        paddingHorizontal: 30,
+        alignItems: 'center'
     }
 })
 
