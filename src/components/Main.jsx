@@ -13,6 +13,7 @@ import UniqueRepository from './uniqueRepository/UniqueRepository';
 
 import CreateReview from './formReview/CreateReview';
 import Register from './user/Register';
+import ReviewsUser from './user/ReviewsUser';
 
 const styles = StyleSheet.create({
   containerContent: {
@@ -20,6 +21,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e4e8',
     flex: 1,
   },
+
+  containerAppBar : {
+    marginHorizontal: 1
+  }
 });
 
 const Main = () => {
@@ -28,7 +33,7 @@ const Main = () => {
 
   return (
     <SafeAreaView  style={{ flex: 1}}>
-      <View>
+      <View style = {styles.containerAppBar}>
         <AppBar />
       </View>
       <View style={styles.containerContent}>
@@ -39,6 +44,7 @@ const Main = () => {
           <Route  path='/repository/:id' element = {<UniqueRepository />}/>
           <Route  path='/createReview' element = {<CreateReview />}/>
           <Route  path='/register' element = {<Register />} />
+          <Route  path='/myReviews' element = {<ReviewsUser />} />
         </Routes>
       </View>
     </SafeAreaView>

@@ -33,8 +33,10 @@ export const GET_ME = gql `
             reviews @include(if: $includeReviews){
                 edges {
                     node {
+                        id
                         text
                         createdAt
+                        rating
                         user {
                             username
                         }

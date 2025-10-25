@@ -87,6 +87,13 @@ const AppBar = () => {
                                         </Link>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={signOut}>
+                                        <Link to='/myReviews'>
+                                            <Text style = {styles.text}>
+                                                My reviews
+                                            </Text>
+                                        </Link> 
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={signOut}>
                                         <Text style = {styles.text}>
                                             Sign Out
                                         </Text>   
