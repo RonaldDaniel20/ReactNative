@@ -10,7 +10,7 @@ import parseDate from '../../Utils/parseDate';
 
 const ReviewSeparator = () => <View style={styles.separator} />;
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review }) => {
     return (
         <View style = { styles.containerReviewItem}>
             <View style = { styles.ratingCircle}>

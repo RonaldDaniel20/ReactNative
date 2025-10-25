@@ -13,6 +13,7 @@ import { useQuery } from "@apollo/client/react";
 
 import { GET_ME } from "../graphql/queries";
 import useSignOut from "../Hooks/useSignOut";
+import useProfile from "../Hooks/useProfile";
 import Loading from "./loading/Loading";
 
 
@@ -41,7 +42,8 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
 
-    const { loading, error, data } = useQuery(GET_ME);
+    const [data, loading, error] = useProfile();
+
     const [ signOut ] = useSignOut();
 
     if(loading){
@@ -83,6 +85,13 @@ const AppBar = () => {
                                                 Create a review
                                             </Text>
                                         </Link>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <Link to='/myReviews'>
+                                            <Text style = {styles.text}>
+                                                My reviews
+                                            </Text>
+                                        </Link> 
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={signOut}>
                                         <Text style = {styles.text}>
