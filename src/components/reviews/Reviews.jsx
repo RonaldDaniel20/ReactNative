@@ -30,15 +30,8 @@ const ReviewItem = ({ review }) => {
 
 const Reviews = ( { id } ) => {
 
-    const { data, loading, error } = useReview(id);
+    const { data, loading, error, handleFetchMore } = useReview(id, 5);
 
-    if(loading){
-        return (
-            <View style = { styles.container}>
-                <Loading />
-            </View>
-        )
-    }
 
     if(error){
         return (
@@ -49,7 +42,7 @@ const Reviews = ( { id } ) => {
     }
 
     const onEndReach = () => {
-        console.log('Hello world!');
+        handleFetchMore();
     }
 
     const reviews = data ? data.repository.reviews.edges.map(edge => edge.node) : [];
