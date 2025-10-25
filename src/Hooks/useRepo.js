@@ -10,12 +10,13 @@ const useRepo = () => {
 
 
 
-    const fetchRepositories = async ({ orderBy, orderDirection }) => {
+    const fetchRepositories = async ({ orderBy, orderDirection, searchKeyword = ''}) => {
 
         const request = await getRepositories({
             variables: {
                 orderBy,
-                orderDirection
+                orderDirection,
+                searchKeyword
             }
         })
 

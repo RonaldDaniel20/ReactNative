@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-native";
 import { useState, useEffect } from "react";
 
 import SortModal from "./sortedRepo/SortModal";
+import SearchRepository from "./searchBar/SearchRepository";
+import { useDebounce } from 'use-debounce';
 
 
 const styles = StyleSheet.create({
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator}></View>
 
-export const RepositoryListContainer = ({ data }) => {
+export const RepositoryListContainer = ({ data, searchQuery, setSearchQuery }) => {
 
 
     const navigate = useNavigate();
@@ -45,24 +47,25 @@ export const RepositoryListContainer = ({ data }) => {
                         : [];
     
 
-
     const onPress = ( id ) => {
         navigate(`/repository/${id}`);
     }
 
 
-
     return (
-        <FlatList 
-            data={repositoryNodes}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({item})  =>  (
-                <TouchableOpacity onPress={() => onPress(item.id)}>
-                    <RepositoryItem props={item}/>
-                </TouchableOpacity>
-            )}
-            keyExtractor={item => item.id}
-        />
+        <View>
+            <SearchRepository searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <FlatList 
+                data={repositoryNodes}
+                ItemSeparatorComponent={ItemSeparator}
+                renderItem={({item})  =>  (
+                    <TouchableOpacity onPress={() => onPress(item.id)}>
+                        <RepositoryItem props={item}/>
+                    </TouchableOpacity>
+                )}
+                keyExtractor={item => item.id}
+            />
+        </View>
     )
 }
 
@@ -74,6 +77,9 @@ const RepositoryList = () => {
     })
 
     const [data, loading, error, fetchRepositories] = useRepo();
+    const [ searchQuery, setSearchQuery] = useState('');
+    const [ value ] = useDebounce(searchQuery, 500);
+    
 
     useEffect(() => {
 
@@ -81,7 +87,8 @@ const RepositoryList = () => {
             try{
                 await fetchRepositories({
                     orderBy: option.orderBy,
-                    orderDirection: option.orderDirection
+                    orderDirection: option.orderDirection,
+                    searchKeyword: value
                 })
             }catch(e){
                 console.error(e.message);
@@ -89,7 +96,8 @@ const RepositoryList = () => {
         }
 
         fetchData();
-    }, [option.orderBy, option.orderDirection])
+    }, [option.orderBy, option.orderDirection, value])
+
 
     if(loading){
         return (
@@ -120,6 +128,8 @@ const RepositoryList = () => {
             <View style = {{marginTop: 30}}>
                 <RepositoryListContainer 
                     data={data}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
                 />
             </View>
         </View>
