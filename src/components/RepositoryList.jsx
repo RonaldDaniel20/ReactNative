@@ -54,7 +54,9 @@ export const RepositoryListContainer = ({ data, searchQuery, setSearchQuery }) =
 
     return (
         <View style = {{flex: 1}}>
-            <SearchRepository searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            <View style = {{backgroundColor: 'white', paddingVertical: 10}}>
+                <SearchRepository searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+            </View>
             <FlatList 
                 data={repositoryNodes}
                 ItemSeparatorComponent={ItemSeparator}
