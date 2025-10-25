@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import Constants from 'expo-constants';
 import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate} from 'react-router-native';
@@ -16,8 +16,7 @@ import Register from './user/Register';
 
 const styles = StyleSheet.create({
   containerContent: {
-    marginLeft: 10,
-    marginRight: 10,
+    marginHorizontal: 10,
     backgroundColor: '#e1e4e8',
     flex: 1,
   },
@@ -28,7 +27,7 @@ const Main = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingBottom: insets.bottom}}>
+    <SafeAreaView  style={{ flex: 1}}>
       <View>
         <AppBar />
       </View>

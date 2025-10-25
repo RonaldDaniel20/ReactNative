@@ -53,7 +53,7 @@ export const RepositoryListContainer = ({ data, searchQuery, setSearchQuery }) =
 
 
     return (
-        <View>
+        <View style = {{flex: 1}}>
             <SearchRepository searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <FlatList 
                 data={repositoryNodes}
@@ -125,7 +125,7 @@ const RepositoryList = () => {
             <View style = { styles.sortModalContainer}>
                 <SortModal setOption={setOption} value={typeFilter()}/>
             </View>
-            <View style = {{marginTop: 30}}>
+            <View style = {{marginTop: 30, flex: 1}}>
                 <RepositoryListContainer 
                     data={data}
                     searchQuery={searchQuery}
